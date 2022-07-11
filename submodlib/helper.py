@@ -582,7 +582,7 @@ def create_sparse_kernel_faiss_innerproduct(
 
     # get preprocessor
     if preproc_str:
-        logger.info("train preproc", preproc_str)
+        logger.info(f"train preproc {preproc_str}")
         d = X.shape[1]
         t0 = time.time()
         if preproc_str.startswith('OPQ'):
@@ -611,7 +611,7 @@ def create_sparse_kernel_faiss_innerproduct(
     clus.spherical=True
     clus.verbose=True
     clus.max_points_per_centroid=10000000
-    logger.info("apply preproc on shape ", X[:nt].shape, " k=", ncent)
+    logger.info(f"apply preproc on shape  {X[:nt].shape}, k=, {ncent}")
     t0=time.time()
     x=preproc.apply_py(np.ascontiguousarray(X[:nt]))
     logger.info("preproc %.3f s output shape %s"%(time.time()-t0, x.shape))
