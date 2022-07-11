@@ -677,19 +677,19 @@ def create_sparse_kernel_faiss_innerproduct(
                 i0, nb, time.time() - t0))
             sys.stdout.flush()
         logger.info("Add time: %.3f s"%(time.time()-t0))
-        logger.info("Aggregate indexes to CPU")
-        t0=time.time()
-        if hasattr(gpu_index, "at"):
-            # it is a sharded index
-            for i in range(ngpu):
-                index_src=faiss.index_gpu_to_cpu(gpu_index.at(i))
-                logger.info(f"index {i} size {index_src.ntotal}")
-                index_src.copy_subset_to(indexall, 0, 0, nb)
-        else:
-            # simple index
-            index_src=faiss.index_gpu_to_cpu(gpu_index)
-            index_src.copy_subset_to(indexall, 0, 0, nb)
-        logger.info("done in %.3f s"%(time.time()-t0))
+        # logger.info("Aggregate indexes to CPU")
+        # t0=time.time()
+        # if hasattr(gpu_index, "at"):
+        #     # it is a sharded index
+        #     for i in range(ngpu):
+        #         index_src=faiss.index_gpu_to_cpu(gpu_index.at(i))
+        #         logger.info(f"index {i} size {index_src.ntotal}")
+        #         index_src.copy_subset_to(indexall, 0, 0, nb)
+        # else:
+        #     # simple index
+        #     index_src=faiss.index_gpu_to_cpu(gpu_index)
+        #     index_src.copy_subset_to(indexall, 0, 0, nb)
+        # logger.info("done in %.3f s"%(time.time()-t0))
         if max_add>0:
             # it does not contain all the vectors
             gpu_index=None
@@ -754,7 +754,6 @@ def create_sparse_kernel_faiss_innerproduct(
             index.addIndex(index1)
             index.own_fields = True
     del indexall
-    del gpu_index
     logger.info("move to GPU done in %.3f s"%(time.time()-t0))
     
     ps=faiss.GpuParameterSpace()
