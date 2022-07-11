@@ -674,7 +674,7 @@ def create_sparse_kernel_faiss_innerproduct(
                     index_src_gpu.reserveMemory(max_add)
                 gpu_index.syncWithSubIndexes()
             logger.info('\r%d/%d (%.3f s)  ' % (
-                i0, nb, time.time() - t0), end=' ')
+                i0, nb, time.time() - t0))
             sys.stdout.flush()
         logger.info("Add time: %.3f s"%(time.time()-t0))
         logger.info("Aggregate indexes to CPU")
@@ -716,7 +716,7 @@ def create_sparse_kernel_faiss_innerproduct(
             else:
                 assert False
             logger.info('\r%d/%d (%.3f s)  ' % (
-                i0, nb, time.time() - t0), end=' ')
+                i0, nb, time.time() - t0))
             sys.stdout.flush()
         logger.info("Add time: %.3f s"%(time.time()-t0))
         gpu_index=None
