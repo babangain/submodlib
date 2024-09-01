@@ -1,0 +1,9 @@
+*.pyc
+.ipynb_checkpoints
+dist/
+build/
+.eggs/
+*.egg-info/
+.python-version
+*.log
+*.so
